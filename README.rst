@@ -1,14 +1,6 @@
 Overview
 ========
 
-These machines perform some simple arithmetical operations. To make one work, import it::
+These machines perform some simple arithmetical operations. To start the REPL, run::
 
-  $ import stack
-
-or:: 
-
-  $ import register
-
-and then::
-
-  $ <stack or register>.repl()
+  $ python repl.py

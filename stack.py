@@ -49,10 +49,10 @@ class Machine:
 
   def dispatch(self, op):
     dispatch_map = {
-      "*": self.mul,
-      "+": self.plus,
-      "/": self.div,
-      "-": self.minus,
+      "mul": self.mul,
+      "add": self.plus,
+      "div": self.div,
+      "sub": self.minus,
       "==": self.equal,
       "jmp": self.jmp, 
       "if": self.if_stmt,
@@ -62,7 +62,7 @@ class Machine:
       "over": self.over,
       "read": self.read,
       "dup": self.dup,
-      "%": self.mod,
+      "mod": self.mod,
       }
     if op in dispatch_map:
       dispatch_map[op]()
@@ -130,18 +130,3 @@ class Machine:
   def println(self):
     sys.stdout.write("%s\n" % self.pop())
     sys.stdout.flush()
-
-
-
-def repl():
-  print('Enter expression to be evaluated as a string')
-  expr = raw_input("> ")
-  expr = expr.split(' ')
-  ar = []
-  for i in expr:
-    try:
-      ar.append(int(i))
-    except:
-      ar.append(i)
-  ar.append('println')
-  ans = Machine(ar).run()

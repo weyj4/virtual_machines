@@ -9,7 +9,6 @@ class Machine(object):
   def execute(self):
     while self.pc < len(self.program):
       i = self.program[self.pc]
-      print(self.pc, self.a, self.b, self.t, self.flag)
       instr, rest = i[0], i[1:]
       self.pc += 1
       getattr(self, 'i_' + instr)(*rest)
@@ -37,24 +36,3 @@ class Machine(object):
 
   def o_mod(self, a, b):
     return getattr(self, a) % getattr(self, b)
-
-def repl():
-  print("Enter expression to be evaluated as a string")
-  expr = raw_input("> ")
-  expr = expr.split(" ")
-  op = expr[2]
-  m = Machine((('exec','t','a','b',op),))
-  m.a = int(expr[0])
-  m.b = int(expr[1])
-  m.execute()
-  print m.t
-  print("Perform another operation? y/n")
-  ans = raw_input("> ")
-  if ans.lower() != 'n' and ans != 'no': 
-    repl()
-
-##m = Machine((('exec','t', 'a', 'b', 'add'),('exec','t','b','t','sub')))
-##m.a = 56
-##m.b = 63
-##m.execute()
-##print m.t
